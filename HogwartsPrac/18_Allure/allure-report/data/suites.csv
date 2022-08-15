@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Mon Aug 01 21:54:08 CST 2022","Mon Aug 01 21:54:08 CST 2022","1","","test_allure_command","","","","test_failure","this test fail"
+"passed","Mon Aug 01 21:54:08 CST 2022","Mon Aug 01 21:54:08 CST 2022","0","","test_allure_command","","","","test_success","this test success"
+"broken","Mon Aug 01 21:54:08 CST 2022","Mon Aug 01 21:54:08 CST 2022","0","","test_allure_command","","","","test_broken",""
+"skipped","Mon Aug 01 21:54:08 CST 2022","Mon Aug 01 21:54:08 CST 2022","0","","test_allure_command","","","","test_skip","this test is skipped"
