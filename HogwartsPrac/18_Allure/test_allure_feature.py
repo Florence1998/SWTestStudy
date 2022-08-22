@@ -16,10 +16,23 @@ class TestSearch(object):
 class TestLogin(object):
     @allure.story("登录成功")
     def test_login_success(self):
-        print("打开应用")
-        print("登录页面")
-        print("输入用户名和密码")
-        print("这是登录：测试用例，登录成功")
+        with allure.step("步骤1：打开应用"):
+            print("打开应用")
+        with allure.step("步骤2：登录页面"):
+            print("登录页面")
+            allure.attach.file("D:/头像.jpg",
+                               name="截图",
+                               attachment_type=allure.attachment_type.JPG,
+                               extension=".jpg")
+        with allure.step("步骤3：输入用户信息"):
+            print("输入用户名和密码")
+            allure.attach("这是一段文本信息", name="文本展示")
+        with allure.step("步骤4：进入成功页面"):
+            allure.attach('<a href="http://news.baidu.com" target="_blank" class="mnav c-font-normal c-color-t">新闻</a>',
+                          name="html展示",
+                          attachment_type=allure.attachment_type.HTML)
+            print("这是登录：测试用例，登录成功")
+
 
     @allure.story("登录成功")
     def test_login_success_a(self):
@@ -34,7 +47,7 @@ class TestLogin(object):
         print("输入用户名")
         print("输入密码")
         print("点击登录")
-        assert "1" == 1
+        assert 1 == 1
         print("登录失败")
 
     @allure.story("登录失败")
