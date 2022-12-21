@@ -1,0 +1,11 @@
+from faker import Faker
+fake = Faker('zh_CN')
+print(fake.name())
+print(fake.name())
+print(fake.name())
+print(fake.phone_number())
+print(fake.phone_number())
+print(fake.phone_number())
+print(fake.ssn())
+print(fake.ssn())
+print(fake.ssn())

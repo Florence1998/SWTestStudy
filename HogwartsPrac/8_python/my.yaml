@@ -1,0 +1,18 @@
+# 编程语言
+languages:
+  - PHP
+  - Java
+  - Python 
+book:
+  Python入门: # 书籍名称
+    price: 55.5
+    author: Lily
+    available: True
+    repertory: 20
+    date: 2018-02-17
+  Java入门:
+    price: 60
+    author: Lily
+    available: False
+    repertory: Null
+    date: 2018-05-11

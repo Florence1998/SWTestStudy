@@ -1,0 +1,4 @@
+12/13/2022 07:04:37 PM [WARNING] is when this event was logged. (logdemo_format.py:6)
+12/13/2022 07:04:37 PM [INFO] So should this (logdemo_format.py:8)
+12/13/2022 07:04:37 PM [WARNING] And this, too (logdemo_format.py:9)
+12/13/2022 07:04:37 PM [ERROR] And non-ASCII stuff, too (logdemo_format.py:10)

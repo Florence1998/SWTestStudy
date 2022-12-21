@@ -42,7 +42,7 @@ class TestDateRecord(object):
         # info记录关键信息，比如断言等
         logger.info(f"实际结果为{search_res}，预期结果为{search_content}")
         # 截图记录，双重保障
-        self.driver.save_screenshot("search_res.png")
+        self.driver.save_screenshot("search_res1.png")
         assert search_res == search_content
 
     def test_page_source_data_record(self):
