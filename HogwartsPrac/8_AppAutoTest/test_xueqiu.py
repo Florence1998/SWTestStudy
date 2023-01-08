@@ -1,3 +1,4 @@
+import logging
 import time
 
 from appium import webdriver
@@ -67,7 +68,8 @@ class TestSearch(object):
         # 2.向搜索框输入:alibaba
         self.driver.find_element(AppiumBy.ID, "com.xueqiu.android:id/search_input_text").send_keys(search_key)
         self.driver.find_element(AppiumBy.XPATH, "//*[@text='阿里巴巴']").click()
-        current_price = self.driver.find_element(AppiumBy.XPATH, "//*[@text='BABA']/../../..//*[@resource-id='com.xueqiu.android:id/current_price']").text
+        current_price = self.driver.find_element(AppiumBy.XPATH,
+                                                 "//*[@text='BABA']/../../..//*[@resource-id='com.xueqiu.android:id/current_price']").text
         print(f"当前阿里巴巴（BABA）对应的股票价格是：{current_price}")
         assert float(current_price) < 200
 
@@ -80,11 +82,17 @@ class TestSearch(object):
         :return:
         """
         # self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("我的")').click()
-        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("我的").resourceId("com.xueqiu.android:id/tab_name").className("android.widget.TextView")').click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                 'new UiSelector().text("我的").resourceId("com.xueqiu.android:id/tab_name").className("android.widget.TextView")').click()
         self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("帐号密码登录")').click()
-        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.xueqiu.android:id/login_account")').send_keys("12345")
-        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.xueqiu.android:id/login_password")').send_keys("12345zyj")
-        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().resourceId("com.xueqiu.android:id/button_next")').click()
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                 'new UiSelector().resourceId("com.xueqiu.android:id/login_account")').send_keys(
+            "12345")
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                 'new UiSelector().resourceId("com.xueqiu.android:id/login_password")').send_keys(
+            "12345zyj")
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                 'new UiSelector().resourceId("com.xueqiu.android:id/button_next")').click()
         time.sleep(3)
 
     def test_search1(self):
@@ -107,7 +115,8 @@ class TestSearch(object):
             searchbox_ele.click()
             # 3.向搜索框输入:alibaba
             # self.driver.find_element(AppiumBy.ID, "com.xueqiu.android:id/search_input_text").send_keys(search_key)
-            self.driver.find_element(AppiumBy.CSS_SELECTOR, "#com\.xueqiu\.android\:id\/search_input_text").send_keys(search_key)
+            self.driver.find_element(AppiumBy.CSS_SELECTOR, "#com\.xueqiu\.android\:id\/search_input_text").send_keys(
+                search_key)
             # 4.判断【阿里巴巴】是否可见:如果可见，打印“搜索成功”;如果不可见，打印“搜索失败”
             # alibaba_ele = self.driver.find_element(AppiumBy.XPATH, "//*[@text='阿里巴巴']")
             alibaba_ele = self.driver.find_element(AppiumBy.CSS_SELECTOR, "*[text='阿里巴巴']")
@@ -120,3 +129,23 @@ class TestSearch(object):
         else:
             print("搜索框不可用")
             assert False
+
+    def test_search3(self):
+        """使用 xpath 定位"""
+        logging.info("搜索用例")
+        element = self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/tv_search']")
+        search_enabled = element.is_enabled()
+        logging.info(f"搜索框的文本：{element.text}，搜索框的坐标：{element.location}，搜索框的size：{element.size}")
+        if search_enabled:
+            logging.info("点击搜索框")
+            element.click()
+            logging.info(f"向搜索框中输入内容：alibaba")
+            self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/search_input_text']").send_keys("alibaba")
+            alibaba_element = self.driver.find_element(AppiumBy.XPATH, "//*[@text='阿里巴巴']")
+
+            # alibaba_element.is_displayed()
+            displayed = alibaba_element.get_attribute("displayed")
+            logging.info("搜索结果是否处于显示状态："+displayed)
+            logging.info("搜索结果页的页面源码为：" + self.driver.page_source)
+            self.driver.save_screenshot("./image/search_result.png")
+            assert displayed == "true"
